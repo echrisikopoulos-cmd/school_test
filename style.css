@@ -109,7 +109,7 @@ h3,
 
 /* Hero Section */
 #hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     padding-top: 140px;
@@ -662,7 +662,12 @@ footer {
 /* Responsive */
 @media (max-width: 992px) {
 
-    .hero-content,
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 15px;
+    }
+
     .method-container,
     .contact-container {
         grid-template-columns: 1fr;
@@ -672,7 +677,7 @@ footer {
 
     .hero-text h1 {
         font-size: 2.5rem;
-        margin-top: 20px;
+        margin-top: 0;
     }
 
     .hero-text p {
@@ -704,6 +709,11 @@ footer {
 }
 
 @media (max-width: 768px) {
+    #hero {
+        padding-top: 100px;
+        padding-bottom: 40px;
+    }
+
     #main-header {
         height: 90px;
     }
@@ -736,15 +746,16 @@ footer {
     .hero-btns {
         flex-direction: column;
         width: 100%;
-        max-width: 300px;
+        max-width: 250px;
         margin: 0 auto;
+        gap: 10px;
     }
 
     .btn {
         width: 100%;
         text-align: center;
-        padding: 12px 20px;
-        font-size: 0.9rem;
+        padding: 10px 15px;
+        font-size: 0.85rem;
     }
 
     .stats-grid {
