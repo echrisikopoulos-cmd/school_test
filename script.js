@@ -140,4 +140,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 150); // 150ms delay is usually enough for the browser to calculate initial layout
     }
+
+    // Handle gallery items target on mobile
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                this.removeAttribute('target');
+            } else {
+                this.setAttribute('target', '_blank');
+            }
+        });
+    });
 });
