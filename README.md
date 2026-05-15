@@ -1,5 +1,3 @@
-# 🌍 Language Academy - Test Website
-
 This is a prototype/test website for a **Foreign Language School**. It was built to demonstrate web design layouts and interactive elements.
 
 ## 📚 Features
