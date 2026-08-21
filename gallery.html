@@ -3,7 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Συλλογή φυλλαδίων και φωτογραφιών από το Κέντρο Ξένων Γλωσσών Κασωτάκη: αίθουρες, πρόγραμμα μαθημάτων και εκπαιδευτικό υλικό.">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#081a39">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
     <title>Gallery | Κέντρο Ξένων Γλωσσών Κασωτάκη</title>
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Κέντρο Ξένων Γλωσσών Κασωτάκη">
+    <meta property="og:title" content="Gallery | Κέντρο Ξένων Γλωσσών Κασωτάκη">
+    <meta property="og:description" content="Φυλλάδια, αίθουρες και εκπαιδευτικό υλικό του σχολείου.">
+    <meta property="og:url" content="https://kassotakischool.gr/gallery.html">
+    <meta property="og:image" content="https://kassotakischool.gr/images/base2.jpg">
+    <meta property="og:locale" content="el_GR">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="48x48" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Set theme before first paint to avoid a flash of the wrong theme -->
+    <script>
+        (function () {
+            var theme;
+            try {
+                theme = localStorage.getItem('theme');
+            } catch (e) { /* localStorage unavailable */ }
+            if (theme !== 'light' && theme !== 'dark') {
+                theme = 'light';
+            }
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,13 +47,15 @@
 </head>
 <body class="gallery-page">
 
+    <a class="skip-link" href="#main-content">Μετάβαση στο περιεχόμενο</a>
+
     <!-- Sticky Header -->
     <header id="main-header">
         <div class="container header-container">
             <div class="logo">
-                <a href="index.html"><img decoding="async" src="images/logo.png" alt="Kassotaki School Logo"></a>
+                <a href="index.html"><img decoding="async" src="images/logo.png" alt="Λογότυπο Κέντρου Ξένων Γλωσσών Κασωτάκη"></a>
             </div>
-            <nav class="desktop-nav">
+            <nav class="desktop-nav" aria-label="Κύρια πλοήγηση">
                 <ul>
                     <li><a href="index.html#hero">Αρχική</a></li>
                     <li><a href="index.html#languages">Ξενόγλωσσο Τμήμα</a></li>
@@ -29,17 +64,24 @@
                     <li><a href="index.html#contact">Επικοινωνία</a></li>
                 </ul>
             </nav>
-            <div class="mobile-menu-btn">
-                <i class="fa-solid fa-bars"></i>
+            <div class="header-controls">
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Εναλλαγή σε σκούρο θέμα">
+                    <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="mobile-menu-btn" type="button" aria-label="Άνοιγμα μενού" aria-expanded="false" aria-controls="mobile-menu">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </header>
 
     <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay">
+    <div class="mobile-menu-overlay" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Μενού πλοήγησης">
         <div class="mobile-menu-content">
-            <div class="close-menu"><i class="fa-solid fa-xmark"></i></div>
-            <nav class="mobile-nav">
+            <button class="close-menu" type="button" aria-label="Κλείσιμο μενού">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <nav class="mobile-nav" aria-label="Πλοήγηση κινητού">
                 <ul>
                     <li><a href="index.html#hero">Αρχική</a></li>
                     <li><a href="index.html#languages">Ξενόγλωσσο Τμήμα</a></li>
@@ -51,45 +93,55 @@
         </div>
     </div>
 
-    <main style="padding-top: 140px;">
+    <main id="main-content" style="padding-top: 140px;">
         <section id="gallery">
             <div class="container">
+                <h1 class="visually-hidden">Συλλογή φυλλαδίων και φωτογραφιών</h1>
                 <div class="gallery-grid">
-                    <a href="images/ent_kas_1.jpg" target="_blank" class="gallery-item" data-reveal="up">
-                        <img loading="lazy" decoding="async" src="images/ent_kas_1.jpg" alt="School Flyer">
+                    <a href="images/gallery/abc1.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up">
+                        <img loading="lazy" decoding="async" src="images/gallery/abc1.jpg" alt="Εκπαιδευτικό υλικό και δραστηριότητες">
                     </a>
-                    <a href="images/fylladio_04.jpg" target="_blank" class="gallery-item" data-reveal="up" data-delay="0.1s">
-                        <img loading="lazy" decoding="async" src="images/fylladio_04.jpg" alt="School Flyer">
+                    <a href="images/gallery/abc2.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.1s">
+                        <img loading="lazy" decoding="async" src="images/gallery/abc2.jpg" alt="Μαθησιακές δραστηριότητες του σχολείου">
                     </a>
-                    <a href="images/f1.jpg" target="_blank" class="gallery-item" data-reveal="up" data-delay="0.2s">
-                        <img loading="lazy" decoding="async" src="images/f1.jpg" alt="School Flyer">
+                    <a href="images/gallery/abc3.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.2s">
+                        <img loading="lazy" decoding="async" src="images/gallery/abc3.jpg" alt="Σχολικές εκδηλώσεις και δραστηριότητες">
                     </a>
-                    <a href="images/f2.jpg" target="_blank" class="gallery-item" data-reveal="up" data-delay="0.3s">
-                        <img loading="lazy" decoding="async" src="images/f2.jpg" alt="School Flyer">
+                    <a href="images/gallery/ent_kas_1.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.3s">
+                        <img loading="lazy" decoding="async" src="images/gallery/ent_kas_1.jpg" alt="Φωτεινή αίθουσα του σχολείου με γραφεία και μεγάλα παράθυρα">
                     </a>
-                    <a href="images/f3.jpg" target="_blank" class="gallery-item" data-reveal="up" data-delay="0.4s">
-                        <img loading="lazy" decoding="async" src="images/f3.jpg" alt="School Flyer">
+                    <a href="images/gallery/fylladio_04.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.4s">
+                        <img loading="lazy" decoding="async" src="images/gallery/fylladio_04.jpg" alt="Φυλλάδιο εγγραφών με ημερομηνίες έναρξης μαθημάτων Σεπτεμβρίου">
                     </a>
-                    <a href="images/f4.jpg" target="_blank" class="gallery-item" data-reveal="up" data-delay="0.5s">
-                        <img loading="lazy" decoding="async" src="images/f4.jpg" alt="School Flyer">
+                    <a href="images/gallery/design.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.5s">
+                        <img loading="lazy" decoding="async" src="images/gallery/design.jpg" alt="Πρόγραμμα μαθημάτων του σχολείου">
                     </a>
-                    <a href="images/design.jpg" target="_blank" class="gallery-item" data-reveal="up">
-                        <img loading="lazy" decoding="async" src="images/design.jpg" alt="School Flyer">
+                    <a href="images/gallery/f1.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up">
+                        <img loading="lazy" decoding="async" src="images/gallery/f1.jpg" alt="Διάδρομος του σχολείου με παιδική διακόσμηση και πινακίδα">
                     </a>
-                    <a href="images/f6.jpg" target="_blank" class="gallery-item" data-reveal="up" data-delay="0.1s">
-                        <img loading="lazy" decoding="async" src="images/f6.jpg" alt="School Flyer">
+                    <a href="images/gallery/f2.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.1s">
+                        <img loading="lazy" decoding="async" src="images/gallery/f2.jpg" alt="Αίθουσα με κορνιζωμένες αφίσες πόλεων (Νέα Υόρκη, Λονδίνο, Παρίσι)">
                     </a>
-                    <a href="images/f7.jpg" target="_blank" class="gallery-item" data-reveal="up" data-delay="0.2s">
-                        <img loading="lazy" decoding="async" src="images/f7.jpg" alt="School Flyer">
+                    <a href="images/gallery/f3.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.2s">
+                        <img loading="lazy" decoding="async" src="images/gallery/f3.jpg" alt="Σύγχρονη αίθουσα διδασκαλίας με πίνακα και καρέκλες">
                     </a>
-                    <a href="images/f9.jpg" target="_blank" class="gallery-item" data-reveal="up" data-delay="0.3s">
-                        <img loading="lazy" decoding="async" src="images/f9.jpg" alt="School Flyer">
+                    <a href="images/gallery/f4.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.3s">
+                        <img loading="lazy" decoding="async" src="images/gallery/f4.jpg" alt="Φυλλάδιο για τα 27 χρόνια λειτουργίας του σχολείου με δέντρο σημαιών χωρών">
                     </a>
-                    <a href="images/f10.jpg" target="_blank" class="gallery-item" data-reveal="up" data-delay="0.4s">
-                        <img loading="lazy" decoding="async" src="images/f10.jpg" alt="School Flyer">
+                    <a href="images/gallery/f6.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.4s">
+                        <img loading="lazy" decoding="async" src="images/gallery/f6.jpg" alt="Αίθουσα σχολείου με γραφεία και φυσικό φωτισμό">
                     </a>
-                    <a href="images/f11.jpg" target="_blank" class="gallery-item" data-reveal="up" data-delay="0.5s">
-                        <img loading="lazy" decoding="async" src="images/f11.jpg" alt="School Flyer">
+                    <a href="images/gallery/f7.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.5s">
+                        <img loading="lazy" decoding="async" src="images/gallery/f7.jpg" alt="Το κτίριο του σχολείου με μπλε πόρτες και παράθυρα">
+                    </a>
+                    <a href="images/gallery/f9.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up">
+                        <img loading="lazy" decoding="async" src="images/gallery/f9.jpg" alt="Αίθουσα με ξύλινο δάπεδο και παιδικές ζωγραφιές στον τοίχο">
+                    </a>
+                    <a href="images/gallery/f10.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.1s">
+                        <img loading="lazy" decoding="async" src="images/gallery/f10.jpg" alt="Αίθουσα με τραπέζια και εκπαιδευτικές αφίσες στους τοίχους">
+                    </a>
+                    <a href="images/gallery/f11.jpg" target="_blank" rel="noopener" class="gallery-item" data-reveal="up" data-delay="0.2s">
+                        <img loading="lazy" decoding="async" src="images/gallery/f11.jpg" alt="Κάρτα με στοιχεία επικοινωνίας του σχολείου">
                     </a>
                 </div>
             </div>
@@ -98,7 +150,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Κέντρο Ξένων Γλωσσών Κασωτάκη. All Rights Reserved.</p>
+            <p>&copy; <span id="footer-year">2026</span> Κέντρο Ξένων Γλωσσών Κασωτάκη. All Rights Reserved.</p>
         </div>
     </footer>
 
