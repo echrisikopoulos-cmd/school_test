@@ -5,7 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Κέντρο Ξένων Γλωσσών Κασωτάκη στη Νίκαια. Ποιοτική εκπαίδευση σε Αγγλικά, Γερμανικά, Γαλλικά και άλλες γλώσσες από το 1995.">
     <meta name="keywords" content="Κασωτάκη, ξένες γλώσσες, Νίκαια, Αγγλικά, Γερμανικά, Γαλλικά, φροντιστήριο">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#081a39">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117">
     <title>Κέντρο Ξένων Γλωσσών Κασωτάκη | Modern Excellence</title>
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Κέντρο Ξένων Γλωσσών Κασωτάκη">
+    <meta property="og:title" content="Κέντρο Ξένων Γλωσσών Κασωτάκη | Modern Excellence">
+    <meta property="og:description" content="Ποιοτική εκπαίδευση σε Αγγλικά, Γερμανικά, Γαλλικά και άλλες γλώσσες στη Νίκαια, από το 1995.">
+    <meta property="og:url" content="https://kassotakischool.gr/">
+    <meta property="og:image" content="https://kassotakischool.gr/images/base2.jpg">
+    <meta property="og:locale" content="el_GR">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="48x48" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Set theme before first paint to avoid a flash of the wrong theme -->
+    <script>
+        (function () {
+            var theme;
+            try {
+                theme = localStorage.getItem('theme');
+            } catch (e) { /* localStorage unavailable */ }
+            if (theme !== 'light' && theme !== 'dark') {
+                theme = 'light';
+            }
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,13 +48,15 @@
 </head>
 <body>
 
+    <a class="skip-link" href="#main-content">Μετάβαση στο περιεχόμενο</a>
+
     <!-- Sticky Header -->
     <header id="main-header">
         <div class="container header-container">
             <div class="logo">
-                <img src="images/logo.png" alt="Kassotaki School Logo" decoding="async">
+                <img src="images/logo.png" alt="Λογότυπο Κέντρου Ξένων Γλωσσών Κασωτάκη" decoding="async">
             </div>
-            <nav class="desktop-nav">
+            <nav class="desktop-nav" aria-label="Κύρια πλοήγηση">
                 <ul>
                     <li><a href="#hero">Αρχική</a></li>
                     <li><a href="#languages">Ξενόγλωσσο Τμήμα</a></li>
@@ -31,17 +65,24 @@
                     <li><a href="#contact">Επικοινωνία</a></li>
                 </ul>
             </nav>
-            <div class="mobile-menu-btn">
-                <i class="fa-solid fa-bars"></i>
+            <div class="header-controls">
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Εναλλαγή σε σκούρο θέμα">
+                    <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="mobile-menu-btn" type="button" aria-label="Άνοιγμα μενού" aria-expanded="false" aria-controls="mobile-menu">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </header>
-    
+
     <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay">
+    <div class="mobile-menu-overlay" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Μενού πλοήγησης">
         <div class="mobile-menu-content">
-            <div class="close-menu"><i class="fa-solid fa-xmark"></i></div>
-            <nav class="mobile-nav">
+            <button class="close-menu" type="button" aria-label="Κλείσιμο μενού">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <nav class="mobile-nav" aria-label="Πλοήγηση κινητού">
                 <ul>
                     <li><a href="index.html#hero">Αρχική</a></li>
                     <li><a href="index.html#languages">Ξενόγλωσσο Τμήμα</a></li>
@@ -53,143 +94,178 @@
         </div>
     </div>
 
+    <main id="main-content">
 
-    <!-- Hero Section -->
-    <section id="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <div class="hero-text" data-reveal="left">
-                <h1>Επίκεντρο μας είναι <span class="highlight" data-text="ο μαθητής">ο μαθητής</span></h1>
-                <p>Καλώς ήρθατε στο Κέντρο Ξένων Γλωσσών Κασωτάκη. Από το 1995, προσφέρουμε ποιοτική εκπαίδευση με επίκεντρο τις ανάγκες του κάθε μαθητή.</p>
-                <div class="hero-btns">
-                    <a href="#contact" class="btn btn-primary">Εγγραφείτε Τώρα</a>
-                    <a href="#languages" class="btn btn-secondary">Δείτε τα Τμήματα</a>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <div class="hero-text" data-reveal="left">
+                    <h1>Επίκεντρο μας είναι <span class="highlight" data-text="ο μαθητής">ο μαθητής</span></h1>
+                    <p>Καλώς ήρθατε στο Κέντρο Ξένων Γλωσσών Κασωτάκη. Από το 1995, προσφέρουμε ποιοτική εκπαίδευση με επίκεντρο τις ανάγκες του κάθε μαθητή.</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn btn-primary">Εγγραφείτε Τώρα</a>
+                        <a href="#languages" class="btn btn-secondary">Δείτε τα Τμήματα</a>
+                    </div>
+                </div>
+                <div class="hero-image" data-reveal="right">
+                    <img src="images/base1.jpg" alt="Εικονογράφηση με μαθητές και εκπαίδευση" class="hero-slide active" decoding="async">
+                    <img src="images/base2.jpg" alt="Εικονογράφηση με ομάδα μαθητών διαφορετικών εθνικοτήτων, βιβλία και υδρόγειο σφαίρα" class="hero-slide" decoding="async">
                 </div>
             </div>
-            <div class="hero-image" data-reveal="right">
-                <img src="images/base2.jpg" alt="Kassotaki School Education" decoding="async">
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Language Sections -->
-    <section id="languages">
-        <div class="container">
-            <div class="section-title" data-reveal="up">
-                <span>Τι διδάσκουμε</span>
-                <h2>Ξενόγλωσσο Τμήμα</h2>
+        <!-- Language Sections -->
+        <section id="languages">
+            <div class="container">
+                <div class="section-title" data-reveal="up">
+                    <span>Τι διδάσκουμε</span>
+                    <h2>Ξενόγλωσσο Τμήμα</h2>
+                </div>
+                <div class="language-grid">
+                    <div class="lang-card" data-reveal="up">
+                        <div class="lang-flag"><img src="https://flagcdn.com/w160/gb.png" alt="Σημαία Ηνωμένου Βασιλείου" loading="lazy" decoding="async"></div>
+                        <h3>Αγγλικά</h3>
+                        <p>Για μαθητές & ενήλικες (Business English).</p>
+                    </div>
+                    <div class="lang-card" data-reveal="up" data-delay="0.1s">
+                        <div class="lang-flag"><img src="https://flagcdn.com/w160/de.png" alt="Σημαία Γερμανίας" loading="lazy" decoding="async"></div>
+                        <h3>Γερμανικά</h3>
+                        <p>Ολοκληρωμένα προγράμματα σπουδών.</p>
+                    </div>
+                    <div class="lang-card" data-reveal="up" data-delay="0.2s">
+                        <div class="lang-flag"><img src="https://flagcdn.com/w160/fr.png" alt="Σημαία Γαλλίας" loading="lazy" decoding="async"></div>
+                        <h3>Γαλλικά</h3>
+                        <p>Προετοιμασία για όλα τα πτυχία.</p>
+                    </div>
+                    <div class="lang-card" data-reveal="up" data-delay="0.3s">
+                        <div class="lang-flag"><img src="https://flagcdn.com/w160/it.png" alt="Σημαία Ιταλίας" loading="lazy" decoding="async"></div>
+                        <h3>Ιταλικά</h3>
+                        <p>Ευχάριστη και αποτελεσματική μάθηση.</p>
+                    </div>
+                    <div class="lang-card" data-reveal="up" data-delay="0.4s">
+                        <div class="lang-flag"><img src="https://flagcdn.com/w160/ru.png" alt="Σημαία Ρωσίας" loading="lazy" decoding="async"></div>
+                        <h3>Ρώσικα</h3>
+                        <p>Εξειδικευμένη διδασκαλία.</p>
+                    </div>
+                    <div class="lang-card" data-reveal="up" data-delay="0.5s">
+                        <div class="lang-flag"><img src="https://flagcdn.com/w160/cn.png" alt="Σημαία Κίνας" loading="lazy" decoding="async"></div>
+                        <h3>Κινέζικα</h3>
+                        <p>Η γλώσσα του μέλλοντος.</p>
+                    </div>
+                </div>
             </div>
-            <div class="language-grid">
-                <div class="lang-card" data-reveal="up">
-                    <div class="lang-flag"><img src="https://flagcdn.com/w160/gb.png" alt="English Flag" loading="lazy" decoding="async"></div>
-                    <h3>Αγγλικά</h3>
-                    <p>Για μαθητές & ενήλικες (Business English).</p>
-                </div>
-                <div class="lang-card" data-reveal="up" data-delay="0.1s">
-                    <div class="lang-flag"><img src="https://flagcdn.com/w160/de.png" alt="German Flag" loading="lazy" decoding="async"></div>
-                    <h3>Γερμανικά</h3>
-                    <p>Ολοκληρωμένα προγράμματα σπουδών.</p>
-                </div>
-                <div class="lang-card" data-reveal="up" data-delay="0.2s">
-                    <div class="lang-flag"><img src="https://flagcdn.com/w160/fr.png" alt="French Flag" loading="lazy" decoding="async"></div>
-                    <h3>Γαλλικά</h3>
-                    <p>Προετοιμασία για όλα τα πτυχία.</p>
-                </div>
-                <div class="lang-card" data-reveal="up" data-delay="0.3s">
-                    <div class="lang-flag"><img src="https://flagcdn.com/w160/it.png" alt="Italian Flag" loading="lazy" decoding="async"></div>
-                    <h3>Ιταλικά</h3>
-                    <p>Ευχάριστη και αποτελεσματική μάθηση.</p>
-                </div>
-                <div class="lang-card" data-reveal="up" data-delay="0.4s">
-                    <div class="lang-flag"><img src="https://flagcdn.com/w160/ru.png" alt="Russian Flag" loading="lazy" decoding="async"></div>
-                    <h3>Ρώσικα</h3>
-                    <p>Εξειδικευμένη διδασκαλία.</p>
-                </div>
-                <div class="lang-card" data-reveal="up" data-delay="0.5s">
-                    <div class="lang-flag"><img src="https://flagcdn.com/w160/cn.png" alt="Chinese Flag" loading="lazy" decoding="async"></div>
-                    <h3>Κινέζικα</h3>
-                    <p>Η γλώσσα του μέλλοντος.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Methodology Section -->
-    <section id="methodology">
-        <div class="container method-container">
-            <div class="method-image" data-reveal="left">
-                <img src="images/design45.jpg" alt="Educational Methods" loading="lazy">
+        <!-- Methodology Section -->
+        <section id="methodology">
+            <div class="container method-container">
+                <div class="method-image" data-reveal="left">
+                    <img src="images/design45.jpg" alt="Αίθουσα του σχολείου με διαδραστικό πίνακα και χάρτη κόσμου" loading="lazy">
+                </div>
+                <div class="method-text" data-reveal="right">
+                    <h2>Εκπαιδευτικές Μέθοδοι</h2>
+                    <p>Συνδυάζουμε την τεχνολογία με την παιδαγωγική ευθύνη. Χρησιμοποιούμε διαδραστικούς πίνακες για μια ευχάριστη και αποτελεσματική εμπειρία μάθησης.</p>
+                    <ul class="check-list">
+                        <li data-reveal="up" data-delay="0.1s"><i class="fa-solid fa-check" aria-hidden="true"></i> Αυστηρό πρόγραμμα σπουδών (CEF)</li>
+                        <li data-reveal="up" data-delay="0.2s"><i class="fa-solid fa-check" aria-hidden="true"></i> Διαγνωστικά Mock Tests</li>
+                        <li data-reveal="up" data-delay="0.3s"><i class="fa-solid fa-check" aria-hidden="true"></i> Δωρεάν ενισχυτική διδασκαλία</li>
+                        <li data-reveal="up" data-delay="0.4s"><i class="fa-solid fa-check" aria-hidden="true"></i> Προετοιμασία για όλα τα πτυχία (Cambridge, Michigan, κ.α.)</li>
+                    </ul>
+                </div>
             </div>
-            <div class="method-text" data-reveal="right">
-                <h2>Εκπαιδευτικές Μέθοδοι</h2>
-                <p>Συνδυάζουμε την τεχνολογία με την παιδαγωγική ευθύνη. Χρησιμοποιούμε διαδραστικούς πίνακες για μια ευχάριστη και αποτελεσματική εμπειρία μάθησης.</p>
-                <ul class="check-list">
-                    <li data-reveal="up" data-delay="0.1s"><i class="fa-solid fa-check"></i> Αυστηρό πρόγραμμα σπουδών (CEF)</li>
-                    <li data-reveal="up" data-delay="0.2s"><i class="fa-solid fa-check"></i> Διαγνωστικά Mock Tests</li>
-                    <li data-reveal="up" data-delay="0.3s"><i class="fa-solid fa-check"></i> Δωρεάν ενισχυτική διδασκαλία</li>
-                    <li data-reveal="up" data-delay="0.4s"><i class="fa-solid fa-check"></i> Προετοιμασία για όλα τα πτυχία (Cambridge, Michigan, κ.α.)</li>
-                </ul>
+
+            <div class="container teachers-container">
+                <div class="teachers-content" data-reveal="left">
+                    <div class="teachers-block">
+                        <h3>Καθηγητές</h3>
+                        <p>Όλοι οι καθηγητές μας είναι πτυχιούχοι, αυστηρά επιλεγμένοι μέσα απο προφορικές και γραπτές συνεντεύξεις. Είμαστε καθηγητές με πολυετή πείρα στην εκπαίδευση και μετεκπαίδευση σε παιδαγωγικά ζητήματα όπως διάσπαση προσοχής και δυσλεξία. Όλο το διδακτικό προσωπικό είναι εκπαιδευμένο στη χρήση της σύγχρονης τεχνολογίας στην τάξη (διαδραστικοί πίνακες). Το μεράκι, η αγάπη και η διάθεση προσφοράς στον μαθητή αναλαμβάνουν να γνωρίσουν στα παιδιά τον ξεχωριστό κόσμο και τον πολιτισμό μιας νέας χώρας. Εμπιστευθείτε μας!</p>
+                    </div>
+                </div>
+                <div class="teachers-image" data-reveal="right">
+                    <img src="images/kathigites.jpg" alt="Οι καθηγητές του Κέντρου Ξένων Γλωσσών Κασωτάκη" loading="lazy">
+                </div>
             </div>
-        </div>
-    </section>
+
+            <div class="container advantages-container">
+                <div class="advantages-image" data-reveal="left">
+                    <img src="images/iperohi.jpg" alt="Σημεία υπεροχής του Κέντρου Ξένων Γλωσσών Κασωτάκη" loading="lazy">
+                </div>
+                <div class="advantages-content" data-reveal="right">
+                    <div class="advantages-block">
+                        <h3>Σημεία Υπεροχής</h3>
+                        <p>Αν είστε γονέας που αναζητά προδιαγραφές μεγάλου εκπαιδευτικού οργανισμού στη λειτουργία ενός φιλικού και πιστοποιημένου κέντρου ξένων γλωσσών και φροντιστηρίου μέσης εκπαίδευσης, τότε εμπιστευτείτε</p>
+                        <ul class="check-list">
+                            <li data-reveal="up" data-delay="0.1s"><i class="fa-solid fa-check" aria-hidden="true"></i> την διδακτική εμπειρία μας από το 1995 και τις επιτυχίες των μαθητών μας</li>
+                            <li data-reveal="up" data-delay="0.2s"><i class="fa-solid fa-check" aria-hidden="true"></i> τους ΠΤΥΧΙΟΥΧΟΥΣ ΠΑΝΕΠΙΣΤΗΜΙΩΝ καθηγητές μας - τα σύγχρονα διδακτικά μέσα σε ανακαινισμένες ΙΔΙΟΚΤΗΤΕΣ εγκαταστάσεις</li>
+                            <li data-reveal="up" data-delay="0.3s"><i class="fa-solid fa-check" aria-hidden="true"></i> τον πλήρη οδηγό σπουδών με την διδαχθείσα ύλη, τα προγράμματα σπουδών, τον φάκελο μαθητού με αξιολόγηση, δείκτες προόδου και μέσους όρους</li>
+                            <li data-reveal="up" data-delay="0.4s"><i class="fa-solid fa-check" aria-hidden="true"></i> την συνεχή επιμόρφωση των καθηγητών - την δωρεάν στήριξη από κοινωνικό λειτουργό (παιδιού και οικογενείας) όταν κριθεί απαραίτητο</li>
+                            <li data-reveal="up" data-delay="0.5s"><i class="fa-solid fa-check" aria-hidden="true"></i> ένα επίσημο μέλος του EUROPALSO και φροντιστήριο με ΑΞΙΟΠΙΣΤΗ εκπαίδευση που ΥΠΟΣΤΗΡΙΖΕΙ ΤΑ ΚΕΝΤΡΑ ΚΑΙ ΤΗΝ ΟΜΑΔΑ ΚΑΙ ΟΧΙ ΤΑ ΑΝΕΥΘΥΝΑ ΚΑΙ ΑΝΕΞΕΛΕΓΚΤΑ ΙΔΙΑΙΤΕΡΑ ΜΑΘΗΜΑΤΑ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     <!-- Excellence Section -->
-    <section id="excellence">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item" data-reveal="up">
-                    <span class="stat-number" data-target="1995">1995</span>
-                    <span class="stat-label">Έτος Ίδρυσης</span>
-                </div>
-                <div class="stat-item" data-reveal="up" data-delay="0.1s">
-                    <span class="stat-number" data-target="100">100%</span>
-                    <span class="stat-label">Επιτυχία</span>
-                </div>
-                <div class="stat-item" data-reveal="up" data-delay="0.2s">
-                    <span class="stat-number" data-target="24">24</span>
-                    <span class="stat-label">Υποστήριξη</span>
+        <section id="excellence">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item" data-reveal="up">
+                        <span class="stat-number" data-target="1995">1995</span>
+                        <span class="stat-label">Έτος Ίδρυσης</span>
+                    </div>
+                    <div class="stat-item" data-reveal="up" data-delay="0.1s">
+                        <span class="stat-number" data-target="100">100%</span>
+                        <span class="stat-label">Επιτυχία</span>
+                    </div>
+                    <div class="stat-item" data-reveal="up" data-delay="0.2s">
+                        <span class="stat-number" data-target="24">24</span>
+                        <span class="stat-label">Υποστήριξη</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container contact-container">
-            <div class="contact-info" data-reveal="left">
-                <h2>Επικοινωνήστε μαζί μας</h2>
-                <p>Είμαστε πάντα στη διάθεσή σας για οποιαδήποτε πληροφορία.</p>
-                <div class="info-item">
-                    <i class="fa-solid fa-phone"></i>
-                    <span>210 42.500.13</span>
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container contact-container">
+                <div class="contact-info" data-reveal="left">
+                    <h2>Επικοινωνήστε μαζί μας</h2>
+                    <p>Είμαστε πάντα στη διάθεσή σας για οποιαδήποτε πληροφορία.</p>
+                    <div class="info-item">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        <span>210 42.500.13</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                        <span>info@kassotakischool.gr</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                        <span>Νίκαια, Αθήνα</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/kassotakischool" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/kassotakischool" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="member-logo">
+                        <p>ΜΕΛΟΣ ΤΗΣ</p>
+                        <img src="images/europalso.webp" alt="Λογότυπο Europalso" loading="lazy" decoding="async">
+                    </div>
                 </div>
-                <div class="info-item">
-                    <i class="fa-solid fa-envelope"></i>
-                    <span>info@kassotakischool.gr</span>
-                </div>
-                <div class="info-item">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>Νίκαια, Αθήνα</span>
-                </div>
-                <div class="social-links">
-                    <a href="http://WWW.FACEBOOK.COM/KASSOTAKISCHOOL.GR" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/kassotakischool" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-                <div class="member-logo">
-                    <p>ΜΕΛΟΣ ΤΗΣ</p>
-                    <img src="images/europalso.webp" alt="Europalso Logo" loading="lazy" decoding="async">
+                <div class="contact-map" data-reveal="right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1870.2786096686955!2d23.658889603276762!3d37.96729959695428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bb82720e9177%3A0x1d0dd2b8fca562b8!2sTriwn+Ierarxwn%2C+Nikea+184+54!5e0!3m2!1sen!2sgr!4v1447667417373" title="Χάρτης τοποθεσίας του σχολείου στη Νίκαια" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
-            <div class="contact-map" data-reveal="right">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1870.2786096686955!2d23.658889603276762!3d37.96729959695428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bb82720e9177%3A0x1d0dd2b8fca562b8!2sTriwn+Ierarxwn%2C+Nikea+184+54!5e0!3m2!1sen!2sgr!4v1447667417373" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-    </section>
+        </section>
+
+    </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Κέντρο Ξένων Γλωσσών Κασωτάκη. All Rights Reserved.</p>
+            <p>&copy; <span id="footer-year">2026</span> Κέντρο Ξένων Γλωσσών Κασωτάκη. All Rights Reserved.</p>
         </div>
     </footer>
 
