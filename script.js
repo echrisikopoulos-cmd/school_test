@@ -1,7 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Theme Toggle (initial theme is applied by the inline script in <head>)
+    const themeToggle = document.getElementById('theme-toggle');
+
+    const applyThemeIcon = () => {
+        if (!themeToggle) return;
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        themeToggle.innerHTML = isDark
+            ? '<i class="fa-solid fa-sun" aria-hidden="true"></i>'
+            : '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
+        themeToggle.setAttribute('aria-label', isDark
+            ? 'Εναλλαγή σε φωτεινό θέμα'
+            : 'Εναλλαγή σε σκούρο θέμα');
+    };
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            try {
+                localStorage.setItem('theme', next);
+            } catch (e) {
+                // localStorage unavailable (e.g. privacy mode) - theme just won't persist
+            }
+            applyThemeIcon();
+        });
+        applyThemeIcon();
+    }
+
     // Reveal Animations on Scroll
     const revealElements = document.querySelectorAll('[data-reveal]');
-    
+
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -29,14 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuLinks = document.querySelectorAll('.mobile-nav a');
 
     const toggleMenu = () => {
-        menuOverlay.classList.toggle('active');
-        document.body.style.overflow = menuOverlay.classList.contains('active') ? 'hidden' : 'auto';
-        
-        if (menuOverlay.classList.contains('active')) {
+        const isActive = menuOverlay.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : 'auto';
+        menuBtn.setAttribute('aria-expanded', String(isActive));
+
+        if (isActive) {
             const items = menuOverlay.querySelectorAll('li');
             items.forEach((item, index) => {
                 item.style.transitionDelay = `${0.1 * (index + 1)}s`;
             });
+            const firstLink = menuOverlay.querySelector('a');
+            if (firstLink) firstLink.focus();
+        } else {
+            menuBtn.focus();
         }
     };
 
@@ -44,16 +77,23 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.addEventListener('click', toggleMenu);
     menuLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
+    // Close the mobile menu with the Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menuOverlay.classList.contains('active')) {
+            toggleMenu();
+        }
+    });
+
     // Counter Animation for Stats
     const stats = document.querySelectorAll('.stat-number');
     const statsSection = document.getElementById('excellence');
     let animated = false;
-    let animationFrameId = null;
+    let animationFrameIds = [];
 
     const animateStats = () => {
         if (animated) return;
         animated = true;
-        
+
         stats.forEach(stat => {
             const target = parseInt(stat.getAttribute('data-target'));
             const isPercent = stat.getAttribute('data-target') === "100";
@@ -64,16 +104,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!startTime) startTime = timestamp;
                 const progress = Math.min((timestamp - startTime) / duration, 1);
                 const currentCount = Math.floor(progress * target);
-                
+
                 stat.innerText = currentCount + (isPercent ? '%' : '');
 
                 if (progress < 1) {
-                    animationFrameId = requestAnimationFrame(step);
+                    animationFrameIds.push(requestAnimationFrame(step));
                 } else {
                     stat.innerText = target + (isPercent ? '%' : '');
                 }
             };
-            animationFrameId = requestAnimationFrame(step);
+            animationFrameIds.push(requestAnimationFrame(step));
         });
     };
 
@@ -82,7 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
             animateStats();
         } else {
             animated = false;
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameIds.forEach(id => cancelAnimationFrame(id));
+            animationFrameIds = [];
             stats.forEach(stat => {
                 const isPercent = stat.getAttribute('data-target') === "100";
                 stat.innerText = '0' + (isPercent ? '%' : '');
@@ -114,14 +155,14 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             const targetId = window.location.hash.substring(1);
             const targetElement = document.getElementById(targetId);
-            
+
             if (targetElement) {
                 // If the target has a reveal animation, reveal it immediately so it takes up proper space
                 if (targetElement.hasAttribute('data-reveal')) {
                     targetElement.classList.add('revealed');
                     targetElement.style.transition = 'none'; // Temporarily disable transition for instant reveal
                 }
-                
+
                 // Also reveal any animated children immediately
                 const childReveals = targetElement.querySelectorAll('[data-reveal]');
                 childReveals.forEach(el => {
@@ -131,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Scroll to the element
                 targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
+
                 // Re-enable transitions after a short delay
                 setTimeout(() => {
                      if (targetElement.hasAttribute('data-reveal')) targetElement.style.transition = '';
@@ -152,4 +193,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Hero Image Slider (alternates base images every 5 seconds)
+    const heroSlides = document.querySelectorAll('.hero-image .hero-slide');
+    if (heroSlides.length > 1) {
+        let currentSlide = 0;
+        setInterval(() => {
+            heroSlides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % heroSlides.length;
+            heroSlides[currentSlide].classList.add('active');
+        }, 5000);
+    }
+
+    // Keep the footer copyright year current
+    const footerYear = document.getElementById('footer-year');
+    if (footerYear) footerYear.textContent = new Date().getFullYear();
 });
