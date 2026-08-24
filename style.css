@@ -16,6 +16,7 @@
 
     /* Surfaces & sections */
     --surface-bg: #FFFFFF;
+    --card-bg: #FFFFFF;
     --card-border: transparent;
     --border-on-dark: rgba(255, 255, 255, 0.1);
     --footer-border: rgba(255, 255, 255, 0.03);
@@ -37,7 +38,8 @@
     /* Section backgrounds */
     --hero-overlay: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.7));
     --languages-bg: #0b294f;
-    --languages-overlay: linear-gradient(rgba(11, 41, 79, 0.4), rgba(11, 41, 79, 0.4));
+    --languages-overlay: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65));
+    --about-overlay: linear-gradient(rgba(11, 41, 79, 0.4), rgba(11, 41, 79, 0.4));
     --stats-overlay: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
     --contact-bg: #081a39;
     --menu-bg: #081a39;
@@ -90,7 +92,8 @@
 
     --hero-overlay: linear-gradient(rgba(13, 17, 23, 0.92), rgba(13, 17, 23, 0.78));
     --languages-bg: #1c2333;
-    --languages-overlay: linear-gradient(rgba(13, 17, 23, 0.88), rgba(13, 17, 23, 0.88));
+    --languages-overlay: linear-gradient(rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 0.8));
+    --about-overlay: linear-gradient(rgba(13, 17, 23, 0.88), rgba(13, 17, 23, 0.88));
     --stats-overlay: linear-gradient(rgba(13, 17, 23, 0.75), rgba(13, 17, 23, 0.75));
     --contact-bg: #1a2332;
     --menu-bg: #0d1117;
@@ -216,7 +219,7 @@ button:focus-visible,
 .desktop-nav ul {
     display: flex;
     list-style: none;
-    gap: 40px;
+    gap: 22px;
 }
 
 .desktop-nav a {
@@ -439,28 +442,125 @@ section {
     color: var(--heading-color);
 }
 
-/* Languages Grid */
-#languages {
+/* About Section ("Ποιοι είμαστε") */
+#about {
     position: relative;
     overflow: hidden;
     background: var(--languages-bg);
+    padding: 160px 0;
 }
 
-#languages::before {
+#about::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--languages-overlay), url('images/bg2.jpg') no-repeat center center / auto 100%;
+    background: var(--about-overlay), url('images/bg2.jpg') no-repeat center center / auto 100%;
     transform: scaleX(-1);
     z-index: 0;
 }
 
-#languages {
-    padding: 160px 0;
+#about .container {
     position: relative;
+    z-index: 1;
+}
+
+#about .section-title {
+    margin-bottom: 60px;
+}
+
+#about .section-title h2 {
+    color: var(--white);
+}
+
+.about-wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-bottom: 35px;
+}
+
+.about-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-icon {
+    color: var(--secondary-color);
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+}
+
+.about-col h3 {
+    color: var(--white);
+    font-size: 1.45rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.about-col p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.05rem;
+    line-height: 1.85;
+    margin-bottom: 18px;
+}
+
+.about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.about-tags span {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.about-tags span:hover {
+    background: var(--secondary-color);
+    color: #081a39;
+    transform: translateY(-2px);
+}
+
+.about-mission {
+    text-align: left;
+    max-width: 100%;
+    margin: 0;
+    padding-top: 10px;
+}
+
+.about-mission p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.05rem;
+    line-height: 1.85;
+    margin: 0;
+}
+
+.about-mission strong {
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+/* Languages Grid */
+#languages {
+    position: relative;
+    overflow: hidden;
+    background: var(--languages-overlay), url('images/bg3.jpg') no-repeat center center / cover;
+    padding: 160px 0;
 }
 
 #languages .section-title {
@@ -468,13 +568,18 @@ section {
     padding-top: 50px;
 }
 
-#languages .container {
-    position: relative;
-    z-index: 1;
+#languages .section-title span {
+    color: var(--accent-color);
+    font-weight: 700;
 }
 
 #languages .section-title h2 {
-    color: var(--white);
+    color: var(--heading-color);
+}
+
+#languages .container {
+    position: relative;
+    z-index: 1;
 }
 
 .language-grid {
@@ -485,8 +590,8 @@ section {
 }
 
 .lang-card {
-    padding: 30px;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    padding: 25px 15px;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     text-align: center;
     position: relative;
     display: flex;
@@ -496,7 +601,7 @@ section {
 }
 
 .lang-card:hover {
-    transform: translateY(-12px);
+    transform: translateY(-8px);
 }
 
 .lang-flag {
@@ -507,8 +612,9 @@ section {
 
 .lang-flag img {
     height: 60px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    border: none;
+    box-shadow: none;
     transition: transform 0.4s ease;
 }
 
@@ -518,17 +624,67 @@ section {
 
 .lang-card h3 {
     font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: var(--white);
+    margin-bottom: 12px;
+    color: var(--heading-color);
+    font-weight: 700;
 }
 
 .lang-card p {
-    color: var(--on-dark-muted);
+    color: var(--text-dark);
     font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 500;
+}
+/* Adults Section ("Τμήματα Ενηλίκων") */
+#adults {
+    position: relative;
+    overflow: hidden;
+    background: var(--languages-bg);
+    padding: 160px 0;
 }
 
-/* Methodology */
-#methodology {
+#adults::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--about-overlay), url('images/bg2.jpg') no-repeat center center / auto 100%;
+    z-index: 0;
+}
+
+#adults .container {
+    position: relative;
+    z-index: 1;
+}
+
+#adults h2 {
+    color: var(--white);
+    margin-bottom: 30px;
+}
+
+#adults .method-text p,
+#adults .method-text strong {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+#adults .method-text ul li {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+#adults .check-list i {
+    color: var(--secondary-color);
+}
+
+#adults .method-image img {
+    border-radius: 20px;
+}
+
+/* Methodology & Programs Section */
+#methodology,
+#programs,
+.methodology-section {
     background-color: var(--surface-bg);
 }
 
@@ -556,7 +712,7 @@ section {
 .check-list li {
     margin-bottom: 15px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     font-weight: 500;
 }
@@ -574,6 +730,7 @@ section {
     gap: 60px;
     align-items: center;
     margin-top: 160px;
+    scroll-margin-top: 100px;
 }
 
 .teachers-image img,
@@ -909,6 +1066,14 @@ footer {
 }
 
 
+[data-theme="dark"] .lang-card h3 {
+    color: var(--white);
+}
+
+[data-theme="dark"] .lang-card p {
+    color: rgba(230, 237, 243, 0.85);
+}
+
 [data-theme="dark"] .method-text p,
 [data-theme="dark"] .teachers-content p,
 [data-theme="dark"] .advantages-content p {
@@ -1019,6 +1184,11 @@ footer {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1110,6 +1280,11 @@ footer {
     .teachers-block h3,
     .advantages-block h3 {
         font-size: 1.3rem;
+    }
+
+    .about-mission p {
+        font-size: 0.98rem;
+        line-height: 1.7;
     }
 }
 
