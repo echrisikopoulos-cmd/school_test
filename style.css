@@ -111,7 +111,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 100px;
+    scroll-padding-top: 90px;
 }
 
 body {
@@ -181,7 +181,7 @@ button:focus-visible,
 #main-header {
     background: var(--header-bg);
     backdrop-filter: blur(10px);
-    height: 140px;
+    height: 125px;
     display: flex;
     align-items: center;
     position: fixed;
@@ -194,7 +194,7 @@ button:focus-visible,
 }
 
 #main-header.scrolled {
-    height: 100px;
+    height: 90px;
     background: var(--header-bg-scrolled);
     box-shadow: var(--header-shadow-scrolled);
 }
@@ -207,26 +207,27 @@ button:focus-visible,
 }
 
 .logo img {
-    height: 110px;
+    height: 85px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     filter: var(--header-logo-filter);
 }
 
 #main-header.scrolled .logo img {
-    height: 70px;
+    height: 65px;
 }
 
 .desktop-nav ul {
     display: flex;
     list-style: none;
-    gap: 22px;
+    gap: 20px;
 }
 
 .desktop-nav a {
     text-decoration: none;
     color: var(--white);
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.02rem;
+    white-space: nowrap;
     transition: var(--transition);
 }
 
@@ -239,7 +240,7 @@ button:focus-visible,
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-left: 35px;
+    margin-left: 25px;
 }
 
 .theme-toggle {
@@ -492,12 +493,6 @@ section {
     flex-direction: column;
 }
 
-.about-icon {
-    color: var(--secondary-color);
-    font-size: 2.4rem;
-    margin-bottom: 20px;
-}
-
 .about-col h3 {
     color: var(--white);
     font-size: 1.45rem;
@@ -730,7 +725,7 @@ section {
     gap: 60px;
     align-items: center;
     margin-top: 160px;
-    scroll-margin-top: 100px;
+    scroll-margin-top: 90px;
 }
 
 .teachers-image img,
@@ -768,8 +763,10 @@ section {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 650px;
+    margin: 0 auto;
+    gap: 40px;
     text-align: center;
 }
 
@@ -794,6 +791,10 @@ section {
 /* Gallery */
 #gallery {
     background-color: var(--surface-bg);
+}
+
+.gallery-page #gallery {
+    padding-top: 160px;
 }
 
 .gallery-grid {
@@ -1087,13 +1088,6 @@ footer {
     border: 1px solid var(--card-border);
 }
 
-[data-theme="dark"] .stat-item {
-    background: rgba(22, 27, 34, 0.6);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    backdrop-filter: blur(5px);
-}
-
 [data-theme="dark"] .stat-label {
     color: var(--text-light);
 }
@@ -1133,6 +1127,20 @@ footer {
 }
 
 /* Responsive */
+@media (max-width: 1200px) and (min-width: 993px) {
+    .desktop-nav ul {
+        gap: 14px;
+    }
+
+    .desktop-nav a {
+        font-size: 0.94rem;
+    }
+
+    .header-controls {
+        margin-left: 15px;
+    }
+}
+
 @media (max-width: 992px) {
 
     .hero-content {
@@ -1181,10 +1189,6 @@ footer {
         display: block;
     }
 
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .about-grid {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -1192,6 +1196,14 @@ footer {
 }
 
 @media (max-width: 768px) {
+    html {
+        scroll-padding-top: 70px;
+    }
+
+    .gallery-page #gallery {
+        padding-top: 110px;
+    }
+
     #hero {
         padding-top: 100px;
         padding-bottom: 40px;
@@ -1275,6 +1287,7 @@ footer {
     .teachers-container,
     .advantages-container {
         margin-top: 100px;
+        scroll-margin-top: 70px;
     }
 
     .teachers-block h3,
